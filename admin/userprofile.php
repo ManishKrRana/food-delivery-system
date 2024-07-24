@@ -44,12 +44,7 @@ if (strlen($_SESSION['user_id']) == 0) {
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
-    <!--[if lt IE 9]>
-    <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+
     <style type="text/css" rel="stylesheet">
       .indent-small {
         margin-left: 5px;
@@ -92,15 +87,8 @@ if (strlen($_SESSION['user_id']) == 0) {
         color: #777;
       }
 
-
-
-
-
-
-
-
       table {
-        width: 650px;
+        width: 500px;
         border-collapse: collapse;
         margin: auto;
         margin-top: 50px;
@@ -128,33 +116,20 @@ if (strlen($_SESSION['user_id']) == 0) {
   </head>
 
   <body>
-
-    <div style="margin-left:50px;">
+    <div>
       <form name="updateticket" id="updatecomplaint" method="post">
-
-
-
-
         <table border="0" cellspacing="0" cellpadding="0">
 
           <?php
-
           $ret1 = mysqli_query($db, "select * FROM users_orders where o_id='" . $_GET['newform_id'] . "'");
           $ro = mysqli_fetch_array($ret1);
           $ret2 = mysqli_query($db, "select * FROM users where u_id='" . $ro['u_id'] . "'");
 
           while ($row = mysqli_fetch_array($ret2)) {
           ?>
-
-
-
-
             <tr>
               <td colspan="2"><b><?php echo $row['f_name']; ?>'s profile</b></td>
-
             </tr>
-
-
             <tr>
               <td>&nbsp;</td>
               <td>&nbsp;</td>
@@ -172,9 +147,6 @@ if (strlen($_SESSION['user_id']) == 0) {
               <td><b>lastname:</b></td>
               <td><?php echo htmlentities($row['l_name']); ?></td>
             </tr>
-
-
-
             <tr height="50">
               <td><b>User Email:</b></td>
               <td><?php echo htmlentities($row['email']); ?></td>
@@ -184,16 +156,6 @@ if (strlen($_SESSION['user_id']) == 0) {
               <td><b>User phone:</b></td>
               <td><?php echo htmlentities($row['phone']); ?></td>
             </tr>
-
-
-
-
-
-
-
-
-
-
             <tr height="50">
               <td><b>Status:</b></td>
               <td><?php if ($row['status'] == 1) {
@@ -203,20 +165,13 @@ if (strlen($_SESSION['user_id']) == 0) {
                   }
                   ?></td>
             </tr>
-
             <tr>
-
               <td colspan="2">
                 <input name="Submit2" type="submit" class="btn btn-danger" value="Close this window " onClick="return f2();" style="cursor: pointer;" />
               </td>
             </tr>
-
           <?php }
-
-
           ?>
-
-
         </table>
       </form>
     </div>

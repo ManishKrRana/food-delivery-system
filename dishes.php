@@ -4,11 +4,8 @@
 include("connection/connect.php"); // connection to db
 error_reporting(0);
 session_start();
-
 include_once 'product-action.php'; //including controller
-
 ?>
-
 
 <head>
     <meta charset="utf-8">
@@ -29,7 +26,6 @@ include_once 'product-action.php'; //including controller
 </head>
 
 <body>
-
     <!--header starts-->
     <header id="header" class="header-scroll top-header headrom">
         <!-- .navbar -->
@@ -41,20 +37,15 @@ include_once 'product-action.php'; //including controller
                     <ul class="nav navbar-nav">
                         <li class="nav-item"> <a class="nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a> </li>
                         <li class="nav-item"> <a class="nav-link active" href="restaurants.php">Restaurants <span class="sr-only"></span></a> </li>
-
                         <?php
                         if (empty($_SESSION["user_id"])) {
                             echo '<li class="nav-item"><a href="login.php" class="nav-link active">login</a> </li>
 							  <li class="nav-item"><a href="registration.php" class="nav-link active">signup</a> </li>';
                         } else {
-
-
                             echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">your orders</a> </li>';
                             echo  '<li class="nav-item"><a href="logout.php" class="nav-link active">logout</a> </li>';
                         }
-
                         ?>
-
                     </ul>
                 </div>
             </div>
@@ -66,7 +57,6 @@ include_once 'product-action.php'; //including controller
         <div class="top-links">
             <div class="container">
                 <ul class="row links">
-
                     <li class="col-xs-12 col-sm-4 link-item"><span>1</span><a href="restaurants.php">Choose Restaurant</a></li>
                     <li class="col-xs-12 col-sm-4 link-item active"><span>2</span><a href="dishes.php?res_id=<?php echo $_GET['res_id']; ?>">Pick Your favorite food</a></li>
                     <li class="col-xs-12 col-sm-4 link-item"><span>3</span><a href="#">Order and Pay online</a></li>
@@ -77,7 +67,6 @@ include_once 'product-action.php'; //including controller
         <!-- start: Inner page hero -->
         <?php $ress = mysqli_query($db, "select * from restaurant where rs_id='$_GET[res_id]'");
         $rows = mysqli_fetch_array($ress);
-
         ?>
         <section class="inner-page-hero bg-image" data-image-src="images/img/dish.jpeg">
             <div class="profile">
@@ -88,7 +77,6 @@ include_once 'product-action.php'; //including controller
                                 <figure><?php echo '<img src="admin/Res_img/' . $rows['image'] . '" alt="Restaurant logo">'; ?></figure>
                             </div>
                         </div>
-
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 profile-desc">
                             <div class="pull-left right-text white-txt">
                                 <h6><a href="#"><?php echo $rows['title']; ?></a></h6>
@@ -103,13 +91,12 @@ include_once 'product-action.php'; //including controller
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star-o"></i>
-                                            </span> </a>
+                                            </span>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -117,57 +104,41 @@ include_once 'product-action.php'; //including controller
         <!-- end:Inner page hero -->
         <div class="breadcrumb">
             <div class="container">
-
             </div>
         </div>
         <div class="container m-t-30">
             <div class="row">
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-
                     <div class="widget widget-cart">
                         <div class="widget-heading">
                             <h3 class="widget-title text-dark">
                                 Your Shopping Cart
                             </h3>
-
-
                             <div class="clearfix"></div>
                         </div>
                         <div class="order-row bg-white">
                             <div class="widget-body">
-
-
                                 <?php
-
                                 $item_total = 0;
-
                                 foreach ($_SESSION["cart_item"] as $item)  // fetch items define current into session ID
                                 {
                                 ?>
-
                                     <div class="title-row">
                                         <?php echo $item["title"]; ?><a href="dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=remove&id=<?php echo $item["d_id"]; ?>">
                                             <i class="fa fa-trash pull-right"></i></a>
                                     </div>
-
                                     <div class="form-group row no-gutter">
                                         <div class="col-xs-8">
                                             <input type="text" class="form-control b-r-0" value=<?php echo "₹" . $item["price"]; ?> readonly id="exampleSelect1">
-
                                         </div>
                                         <div class="col-xs-4">
                                             <input class="form-control" type="text" readonly value='<?php echo $item["quantity"]; ?>' id="example-number-input">
                                         </div>
-
                                     </div>
-
                                 <?php
                                     $item_total += ($item["price"] * $item["quantity"]); // calculating current price into cart
                                 }
                                 ?>
-
-
-
                             </div>
                         </div>
 
@@ -181,15 +152,9 @@ include_once 'product-action.php'; //including controller
                                 <a href="checkout.php?res_id=<?php echo $_GET['res_id']; ?>&action=check" class="btn theme-btn btn-lg">Checkout</a>
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
-
                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6">
-
                     <!-- end:Widget menu -->
                     <div class="menu-widget" id="2">
                         <div class="widget-heading">
@@ -208,9 +173,6 @@ include_once 'product-action.php'; //including controller
                             $products = $stmt->get_result();
                             if (!empty($products)) {
                                 foreach ($products as $product) {
-
-
-
                             ?>
                                     <div class="food-item">
                                         <div class="row">
@@ -237,20 +199,14 @@ include_once 'product-action.php'; //including controller
                                         <!-- end:row -->
                                     </div>
                                     <!-- end:Food item -->
-
                             <?php
                                 }
                             }
-
                             ?>
-
-
-
                         </div>
                         <!-- end:Collapse -->
                     </div>
                     <!-- end:Widget menu -->
-
                 </div>
                 <!-- end:Bar -->
                 <div class="col-xs-12 col-md-12 col-lg-3">
@@ -265,16 +221,21 @@ include_once 'product-action.php'; //including controller
                             </div>
                             <div class="widget-body">
                                 <ul class="tags">
-                                    <li> <a href="#" class="tag">
+                                    <li>
+                                        <a href="#" class="tag">
                                             Coupons
-                                        </a> </li>
-                                    <li> <a href="#" class="tag">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="tag">
                                             Discounts
-                                        </a> </li>
-                                    <li> <a href="#" class="tag">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="tag">
                                             Deals
-                                        </a> </li>
-                                    
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -314,97 +275,96 @@ include_once 'product-action.php'; //including controller
         </section>
         <!-- start: FOOTER -->
         <footer class="footer">
-        <div class="container">
-            <!-- top footer statrs -->
-            <div class="row top-footer">
-                <div class="col-xs-12 col-sm-3 footer-logo-block color-gray">
-                    <a href="#"> <img class="img-fluid" src="images/food-logo.png" width="160px" alt="Footer logo"> </a> <span>Order Delivery &amp; Take-Out </span>
-                </div>
-                <div class="col-xs-12 col-sm-3 about color-gray">
-                    <h5>About Us</h5>
-                    <ul>
-                        <li><a href="#">About us</a> </li>
-                        <li><a href="#">History</a> </li>
-                        <li><a href="#">Our Team</a> </li>
-                        <li><a href="#">We are hiring</a> </li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 how-it-works-links color-gray">
-                    <h5>How it Works</h5>
-                    <ul>
-                        <li><a href="#">Enter your location</a> </li>
-                        <li><a href="#">Choose restaurant</a> </li>
-                        <li><a href="#">Choose meal</a> </li>
-                        <li><a href="#">Pay via credit card</a> </li>
-                        <li><a href="#">Wait for delivery</a> </li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 pages color-gray">
-                    <h5>Pages</h5>
-                    <ul>
-                        <li><a href="#">Search results page</a> </li>
-                        <li><a href="#">User Sing Up Page</a> </li>
-                        <li><a href="#">Pricing page</a> </li>
-                        <li><a href="#">Make order</a> </li>
-                        <li><a href="#">Add to cart</a> </li>
-                    </ul>
-                </div>
-
-            </div>
-            <!-- top footer ends -->
-            <!-- bottom footer statrs -->
-            <div class="bottom-footer">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-3 payment-options color-gray">
-                        <h5>Payment Options</h5>
+            <div class="container">
+                <!-- top footer statrs -->
+                <div class="row top-footer">
+                    <div class="col-xs-12 col-sm-3 footer-logo-block color-gray">
+                        <a href="#"> <img class="img-fluid" src="images/food-logo.png" width="160px" alt="Footer logo"> </a> <span>Order Delivery &amp; Take-Out </span>
+                    </div>
+                    <div class="col-xs-12 col-sm-3 about color-gray">
+                        <h5>About Us</h5>
                         <ul>
-                            <li>
-                                <a href="#"> <img src="images/upi.jpg" width="40px" alt="UPI"> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <img src="images/phonepe.png" width="40px" alt="Phone Pe"> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <img src="images/gpay.jpg" width="40px" alt="G-Pay"> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <img src="images/paytm.jpg" width="40px" alt="Paytm"> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <img src="images/apay.png" width="40px" alt="Amazon Pay"> </a>
-                            </li>
+                            <li><a href="#">About us</a> </li>
+                            <li><a href="#">History</a> </li>
+                            <li><a href="#">Our Team</a> </li>
+                            <li><a href="#">We are hiring</a> </li>
                         </ul>
                     </div>
-                    <div class="col-xs-12 col-sm-4 address color-gray">
-                        <h5>Address</h5>
-                        <p>S N Yadav Road, Karamtoli, Ranchi, Jharkhand - 834008</p>
-                        <p><i class="fa-solid fa-phone"></i>
-                           <a href="tel:+917482816710">7482816710</a>,
-                           <a href="tel:+919123292205">9123292205</a>
-                        </p>
-                        <p><i class="fa-solid fa-envelope"></i><a href="mailto:support@foodbox.com">support@foodbox.com</a></p>
+                    <div class="col-xs-12 col-sm-3 how-it-works-links color-gray">
+                        <h5>How it Works</h5>
+                        <ul>
+                            <li><a href="#">Enter your location</a> </li>
+                            <li><a href="#">Choose restaurant</a> </li>
+                            <li><a href="#">Choose meal</a> </li>
+                            <li><a href="#">Pay via credit card</a> </li>
+                            <li><a href="#">Wait for delivery</a> </li>
+                        </ul>
                     </div>
-                    <div class="col-xs-12 col-sm-5 additional-info color-gray">
-                        <h5>Addition informations</h5>
-                        <p>Join the thousands of other restaurants who benefit from having their menus on TakeOff</p>
-                        <h5>Social Links</h5>
-                        <div class="social-links">
-                            <a href="#" class="fa fa-facebook"></a>
-                            <a href="#" class="fa fa-twitter"></a>
-                            <a href="#" class="fa fa-linkedin"></a>
-                            <a href="#" class="fa fa-youtube"></a>
-                            <a href="#" class="fa fa-instagram"></a>
+                    <div class="col-xs-12 col-sm-3 pages color-gray">
+                        <h5>Pages</h5>
+                        <ul>
+                            <li><a href="#">Search results page</a> </li>
+                            <li><a href="#">User Sing Up Page</a> </li>
+                            <li><a href="#">Pricing page</a> </li>
+                            <li><a href="#">Make order</a> </li>
+                            <li><a href="#">Add to cart</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- top footer ends -->
+                <!-- bottom footer statrs -->
+                <div class="bottom-footer">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 payment-options color-gray">
+                            <h5>Payment Options</h5>
+                            <ul>
+                                <li>
+                                    <a href="#"> <img src="images/upi.jpg" width="40px" alt="UPI"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="images/phonepe.png" width="40px" alt="Phone Pe"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="images/gpay.jpg" width="40px" alt="G-Pay"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="images/paytm.jpg" width="40px" alt="Paytm"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="images/apay.png" width="40px" alt="Amazon Pay"> </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 address color-gray">
+                            <h5>Address</h5>
+                            <p>S N Yadav Road, Karamtoli, Ranchi, Jharkhand - 834008</p>
+                            <p><i class="fa-solid fa-phone"></i>
+                                <a href="tel:+917482816710">7482816710</a>,
+                                <a href="tel:+919123292205">9123292205</a>
+                            </p>
+                            <p><i class="fa-solid fa-envelope"></i><a href="mailto:support@foodbox.com">support@foodbox.com</a></p>
+                        </div>
+                        <div class="col-xs-12 col-sm-5 additional-info color-gray">
+                            <h5>Addition informations</h5>
+                            <p>Join the thousands of other restaurants who benefit from having their menus on TakeOff</p>
+                            <h5>Social Links</h5>
+                            <div class="social-links">
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-linkedin"></a>
+                                <a href="#" class="fa fa-youtube"></a>
+                                <a href="#" class="fa fa-instagram"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <hr>
+                <div class="end-footer">
+                    <p>&copy; Copyright 2023, All Rights Reserved | FoodBox.</p>
+                </div>
+                <!-- bottom footer ends -->
             </div>
-            <hr>
-            <div class="end-footer">
-                <p>&copy; Copyright 2023, All Rights Reserved  |  FoodBox.</p>
-            </div>
-            <!-- bottom footer ends -->
-        </div>
-    </footer>
+        </footer>
         <!-- end:Footer -->
     </div>
     <!-- end:page wrapper -->
